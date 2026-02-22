@@ -7,6 +7,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # to generate compile_commands.json
 add_subdirectory(flags)
 add_subdirectory(third_party)
 
+add_subdirectory(src/lexer)
+add_subdirectory(src/helpers)
+
 add_executable(slr.x)
 
 target_sources(slr.x
@@ -22,6 +25,7 @@ target_include_directories(slr.x
 target_link_libraries(slr.x
     PRIVATE 
         slr-flags
+        lexer
 
         spdlog
 )
