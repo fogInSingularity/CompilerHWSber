@@ -22,7 +22,9 @@ jobs:
             build-essential \
             cmake \
             clang \
-            lld
+            lld \
+            flex \
+            libfl-dev
 
       - name: build
         run: |
