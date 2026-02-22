@@ -1,8 +1,12 @@
 #include <iostream>
 
+#include <optional>
 #include <spdlog/spdlog.h>
 #include <spdlog/common.h>
 #include <spdlog/sinks/basic_file_sink.h>
+
+#include "lexer/lexer.hpp"
+#include "parser/parser.hpp"
 
 int main(int argc, const char* argv[]) {
     auto logger = spdlog::basic_logger_mt("slr", "slr.log", true);
@@ -29,4 +33,9 @@ int main(int argc, const char* argv[]) {
 
         return EXIT_FAILURE;
     }
+
+    slr::prs::Parser parser{argv[1]};
+    bool is_accepted = parser.Accept();
+
+    std::cout << "Text is accepted: " << std::boolalpha << is_accepted << "\n";
 }

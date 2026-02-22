@@ -22,7 +22,9 @@ jobs:
             build-essential \
             cmake \
             clang \
-            lld
+            lld \
+            flex \
+            libfl-dev
 
       - name: build
         run: |
@@ -34,5 +36,13 @@ jobs:
             -DCMAKE_C_COMPILER="${{matrix.compiler.cc}}" \
             -DCMAKE_CXX_COMPILER="${{matrix.compiler.cxx}}"
           cmake --build build --parallel 4
+
+          popd
+
+      - name: test
+        run: |
+          pushd ${{ matrix.project }}
+
+          ./build/tests/parser_tests
 
           popd
