@@ -6,6 +6,7 @@
 #include <spdlog/sinks/basic_file_sink.h>
 
 #include "lexer/lexer.hpp"
+#include "parser/parser.hpp"
 
 int main(int argc, const char* argv[]) {
     auto logger = spdlog::basic_logger_mt("slr", "slr.log", true);
@@ -33,15 +34,8 @@ int main(int argc, const char* argv[]) {
         return EXIT_FAILURE;
     }
 
-    slr::lex::Lexer lexer{argv[1]};
+    slr::prs::Parser parser{argv[1]};
+    bool is_accepted = parser.Accept();
 
-    bool is_finished = false;
-    do {
-        slr::lex::Token cur_token = lexer.Next();
-        is_finished = (cur_token.type == slr::lex::Token::TokenType::kFinished);
-
-        if (!is_finished) {
-            std::cout << cur_token.ToStr();
-        }
-    } while (!is_finished);
+    std::cout << "Text is accepted: " << std::boolalpha << is_accepted << "\n";
 }

@@ -49,6 +49,9 @@ struct Token {
                     case kMul: return "*";
                     case kLeftBracket: return "(";
                     case kRightBracket: return ")";
+                    default:
+                        assert(!"Unkown Operations");
+                        return "<uknown>";
                 }
             }
             case kVar: return get<std::string>(val);

@@ -36,3 +36,11 @@ jobs:
           cmake --build build --parallel 4
 
           popd
+
+      - name: test
+        run: |
+          pushd ${{ matrix.project }}
+
+          ./build/tests/parser_tests
+
+          popd
